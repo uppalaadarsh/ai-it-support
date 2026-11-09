@@ -319,11 +319,11 @@ for idx, entry in enumerate(st.session_state.chat_history):
         st.caption("Suggested replies:")
         btn_col1, btn_col2, btn_col3 = st.columns([1, 1, 2])
         with btn_col1:
-            if st.button("👍 Yes, issue is resolved", key=f"sug_yes_{idx}", use_container_width=True):
+            if st.button("👍 Yes, issue is resolved ↵", key=f"sug_yes_{idx}", use_container_width=True):
                 st.session_state.queued_prompt = "Yes, that resolved my issue. Thank you!"
                 st.rerun()
         with btn_col2:
-            if st.button("👎 No, still not working", key=f"sug_no_{idx}", use_container_width=True):
+            if st.button("👎 No, still not working ↵", key=f"sug_no_{idx}", use_container_width=True):
                 st.session_state.queued_prompt = "No, that did not work. Please create a support ticket for me."
                 st.rerun()
 
@@ -454,10 +454,8 @@ if not st.session_state.pending_approval:
                 response = run_agent(user_input)
 
             if response:
-                st.markdown(response)
                 st.session_state.chat_history.append({
                     "role": "assistant",
                     "content": response
                 })
-            else:
-                st.rerun()
+            st.rerun()
